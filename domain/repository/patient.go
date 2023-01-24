@@ -26,7 +26,7 @@ func NewPatientRepository() PatientRepository {
 }
 
 func (r *patientRepository) ReadAllPatients(c *gin.Context, src *[]domain.Patient) (err error) {
-	if err = r.db.NewSelect().Model(src).Scan(c); err != nil {
+	if err = r.db.NewSelect().Model(src).Relation("Bookings").Scan(c); err != nil {
 		return err
 	}
 
@@ -42,7 +42,7 @@ func (r *patientRepository) CreatePatient(c *gin.Context, src *domain.Patient) (
 }
 
 func (r *patientRepository) ReadDetailPatient(c *gin.Context, src *domain.Patient, id int64) (err error) {
-	if err = r.db.NewSelect().Model(src).Where("id = ?", &id).Scan(c); err != nil {
+	if err = r.db.NewSelect().Model(src).Relation("Bookings").Where("id = ?", &id).Scan(c); err != nil {
 		return err
 	}
 

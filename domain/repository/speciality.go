@@ -26,7 +26,7 @@ func NewSpecialityRepository() SpecialityRepository {
 }
 
 func (r *specialityRepository) ReadAllSpecialities(c *gin.Context, src *[]domain.Speciality) (err error) {
-	if err = r.db.NewSelect().Model(src).Scan(c); err != nil {
+	if err = r.db.NewSelect().Model(src).Relation("Doctors").Scan(c); err != nil {
 		return err
 	}
 
@@ -42,7 +42,7 @@ func (r *specialityRepository) CreateSpeciality(c *gin.Context, src *domain.Spec
 }
 
 func (r *specialityRepository) ReadDetailSpeciality(c *gin.Context, src *domain.Speciality, id int64) (err error) {
-	if err = r.db.NewSelect().Model(src).Where("id = ?", &id).Scan(c); err != nil {
+	if err = r.db.NewSelect().Model(src).Relation("Doctors").Where("id = ?", &id).Scan(c); err != nil {
 		return err
 	}
 

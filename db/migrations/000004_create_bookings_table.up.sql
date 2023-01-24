@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS bookings(
   id serial PRIMARY KEY,
-  DoctorId INT NOT NULL,
-  PatientId INT NOT NULL,
-  startDate DATE NOT NULL,
-  endDate DATE NOT NULL,
-  CONSTRAINT fk_doctors FOREIGN KEY(DoctorId) REFERENCES doctors(id),
-  CONSTRAINT fk_patients FOREIGN KEY(PatientId) REFERENCES patients(id)
+  doctor_id INT NOT NULL,
+  patient_id INT NOT NULL,
+  start_date DATE NOT NULL,
+  end_date DATE NOT NULL,
+  CONSTRAINT fk_doctors FOREIGN KEY(doctor_id) REFERENCES doctors(id),
+  CONSTRAINT fk_patients FOREIGN KEY(patient_id) REFERENCES patients(id)
 );

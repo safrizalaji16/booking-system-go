@@ -59,7 +59,6 @@ func (ctl *doctorController) CreateDoctor(c *gin.Context) {
 
 		return
 	}
-
 	var doctor domain.Doctor
 
 	if err := copier.Copy(&doctor, &src); err != nil {
