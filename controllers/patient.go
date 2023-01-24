@@ -9,6 +9,7 @@ import (
 	"github.com/jinzhu/copier"
 	"github.com/safrizalaji16/booking-system-go/domain"
 	"github.com/safrizalaji16/booking-system-go/dto/requests"
+	"github.com/safrizalaji16/booking-system-go/helpers"
 	"github.com/safrizalaji16/booking-system-go/services"
 )
 
@@ -69,6 +70,8 @@ func (ctl *patientController) CreatePatient(c *gin.Context) {
 
 		return
 	}
+
+	patient.Password, _ = helpers.HashPassword(patient.Password)
 
 	err := ctl.patientSrv.CreatePatient(c, &patient)
 	if err != nil {
